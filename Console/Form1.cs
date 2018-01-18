@@ -16,5 +16,13 @@ namespace Console
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TradeEngine.Authentication.Session Session = new TradeEngine.Authentication.Session("ADemoUSer", "BlaBlaBla123!", "f18d6aa81e37f2c4701f1684b17b8fb7f7da8ec8", "https://demo-api.ig.com/gateway/deal");
+
+            Session.Logon();
+
+        }
     }
 }

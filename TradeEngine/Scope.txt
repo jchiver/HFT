@@ -1,0 +1,7 @@
+﻿The purpose of this class is to handle the trades that are made against the IG platform. 
+
+For example, this class should 
+
+-execute new trades
+-receive updates for trades placed
+-execute updates against trades such as to close if it breaches x,x etc

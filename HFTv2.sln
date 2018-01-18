@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeEngine", "TradeEngine\TradeEngine.csproj", "{479BC142-59A7-414A-B3F9-72ECA193673D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console", "Console\Console.csproj", "{04928E80-F06F-47CA-BAB5-993A3B7E371C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeEngine", "TradeEngine\TradeEngine.csproj", "{E8EF9A54-2361-4CFA-87F8-1D69D7C01EB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{479BC142-59A7-414A-B3F9-72ECA193673D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{479BC142-59A7-414A-B3F9-72ECA193673D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{479BC142-59A7-414A-B3F9-72ECA193673D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{479BC142-59A7-414A-B3F9-72ECA193673D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{04928E80-F06F-47CA-BAB5-993A3B7E371C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{04928E80-F06F-47CA-BAB5-993A3B7E371C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04928E80-F06F-47CA-BAB5-993A3B7E371C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04928E80-F06F-47CA-BAB5-993A3B7E371C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8EF9A54-2361-4CFA-87F8-1D69D7C01EB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8EF9A54-2361-4CFA-87F8-1D69D7C01EB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8EF9A54-2361-4CFA-87F8-1D69D7C01EB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8EF9A54-2361-4CFA-87F8-1D69D7C01EB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
