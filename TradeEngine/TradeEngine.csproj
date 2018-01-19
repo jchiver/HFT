@@ -50,6 +50,7 @@
     <Compile Include="Model\Trading\TradeConfirmResponse.cs" />
     <Compile Include="Model\WorkingOrder\CreateWorkingOrderRequest.cs" />
     <Compile Include="Model\WorkingOrder\CreateWorkingOrderResponse.cs" />
+    <Compile Include="Model\WorkingOrder\DeleteWorkingOrderResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestCommands\IGResponse.cs" />
     <Compile Include="RestCommands\Post.cs" />

@@ -13,7 +13,8 @@ namespace TradeEngine.RestCommands
         public enum CommandType
         {
             Get,
-            Post
+            Post,
+            Delete
         }
 
         private void SetDefaultHeaders(HttpClient HttpClient, Authentication.Session session, String Version)
@@ -73,6 +74,9 @@ namespace TradeEngine.RestCommands
                         break;
                     case CommandType.Post:
                         response = c.PostAsync(URL, SendContent).Result;
+                        break;
+                    case CommandType.Delete:
+                        response = c.DeleteAsync(URL).Result;
                         break;
                 }
 

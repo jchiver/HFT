@@ -36,11 +36,13 @@ namespace Console
             tradeAttributes.Type = "STOP";
 
 
-            TradeEngine.Trade tr = new TradeEngine.Trade(tradeAttributes);
+            TradeEngine.Trade tr = new TradeEngine.Trade(tradeAttributes, Session);
 
-            tr.SendWorkingOrderRequest(Session);
+            tr.SendWorkingOrderRequest();
 
-            tr.GetTradeConfirm(Session);
+            tr.GetTradeConfirm();
+
+            tr.DeleteWorkingOrder();
 
         }
     }
