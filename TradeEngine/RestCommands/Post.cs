@@ -43,17 +43,7 @@ namespace TradeEngine.RestCommands
 
                         return iGResponse;
 
-                        //SessionDetails = JsonConvert.DeserializeObject<Security.PostSessionResponse>(mycontent);
-
-                        //HttpHeaders ReceivedHeaders = response.Headers;
-
-                        //IEnumerable<string> headerValuesA = ReceivedHeaders.GetValues("CST");
-                        //CST = headerValuesA.FirstOrDefault();
-
-                        //IEnumerable<string> headerValuesB = ReceivedHeaders.GetValues("X-SECURITY-TOKEN");
-                        //X_SECURITY_TOKEN = headerValuesB.FirstOrDefault();
-
-                        //OnStatusUpdated(SessionLogonStatusEventArgs.eStatus.Successful);
+                        
                     }
 
                 }

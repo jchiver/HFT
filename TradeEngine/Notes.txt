@@ -1,0 +1,39 @@
+﻿For a buy
+
+Example 1,
+
+Level = 2000
+Current Buy = 2000
+Stop or Limit = Limit
+
+Example 2,
+
+Level = 2000
+Current Buy = 2010
+Stop or Limit = Stop
+
+Example 3,
+
+Level = 2000
+Current Buy = 1980
+Stop or Limit = Limit
+
+For a Sell
+
+Example 1,
+
+Level = 2000
+Current Buy = 2000
+Stop or Limit = Stop
+
+Example 2,
+
+Level = 2000
+Current Buy = 2010
+Stop or Limit = Stop
+
+Example 3,
+
+Level = 2000
+Current Buy = 1980
+Stop or Limit = Limit

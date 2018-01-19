@@ -46,11 +46,17 @@
     <Compile Include="Authentication\Session.cs" />
     <Compile Include="Authentication\SessionRequest.cs" />
     <Compile Include="Authentication\SessionResponse.cs" />
+    <Compile Include="AutoTrader.cs" />
+    <Compile Include="Model\WorkingOrder\CreateWorkingOrderRequest.cs" />
+    <Compile Include="Model\WorkingOrder\CreateWorkingOrderResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestCommands\IGResponse.cs" />
     <Compile Include="RestCommands\Post.cs" />
+    <Compile Include="Trade.cs" />
+    <Compile Include="TradeAttributes.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Notes.txt" />
     <Content Include="Scope.txt" />
   </ItemGroup>
   <ItemGroup>

@@ -23,6 +23,23 @@ namespace Console
 
             Session.Logon();
 
+            TradeEngine.TradeAttributes tradeAttributes = new TradeEngine.TradeAttributes();
+
+            tradeAttributes.CurrencyCode = "GBP";
+            tradeAttributes.Direction = "BUY";
+            tradeAttributes.Epic = "IX.D.DOW.DAILY.IP";
+            tradeAttributes.GuaranteedStop = "false";
+            tradeAttributes.Level = "26090";
+            tradeAttributes.LimitDistance = "1";
+            tradeAttributes.Size = "1";
+            tradeAttributes.StopDistance = "50";
+            tradeAttributes.Type = "STOP";
+
+
+            TradeEngine.Trade tr = new TradeEngine.Trade(tradeAttributes);
+
+            tr.SendWorkingOrderRequest(Session);
+
         }
     }
 }

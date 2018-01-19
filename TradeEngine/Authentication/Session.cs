@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -13,7 +15,11 @@ namespace TradeEngine.Authentication
 
         public String API_Key { get; set; }
 
-        public String URL { get; set; }
+        public String BaseURL { get; set; }
+
+        public String CST { get; set; }
+
+        public String X_SECURITY_TOKEN { get; set; }
 
         RestCommands.IGResponse<SessionResponse> Response;
 
@@ -23,16 +29,24 @@ namespace TradeEngine.Authentication
             this.Username = Username;
             this.Password = Password;
             this.API_Key = API_Key;
-            this.URL = URL;
+            this.BaseURL = URL;
         }
 
         public async void Logon()
         {
 
             RestCommands.Post Post = new RestCommands.Post();
-            RestCommands.IGResponse<SessionResponse> Response = await Post.Execute<SessionResponse>(this.URL + @"/session", GetSerializedSessionRequest(), GetCustomHTTPHeaders());
+            RestCommands.IGResponse<SessionResponse> Response = await Post.Execute<SessionResponse>(this.BaseURL + @"/session", GetSerializedSessionRequest(), GenerateCustomHTTPHeaders());
 
             this.Response = Response;
+
+            HttpHeaders ReceivedHeaders = this.Response.httpHeaders;
+
+            IEnumerable<string> headerValuesA = ReceivedHeaders.GetValues("CST");
+            CST = headerValuesA.FirstOrDefault();
+
+            IEnumerable<string> headerValuesB = ReceivedHeaders.GetValues("X-SECURITY-TOKEN");
+            X_SECURITY_TOKEN = headerValuesB.FirstOrDefault();
 
             Console.WriteLine("2");
         }
@@ -47,7 +61,7 @@ namespace TradeEngine.Authentication
             return JsonConvert.SerializeObject(sessionRequest);
         }
 
-        private List<String> GetCustomHTTPHeaders()
+        private List<String> GenerateCustomHTTPHeaders()
         {
             List<String> TempStringList = new List<string>();
 
