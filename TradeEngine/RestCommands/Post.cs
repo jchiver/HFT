@@ -57,11 +57,6 @@ namespace TradeEngine.RestCommands
 
             using (HttpClient c = new HttpClient())
             {
-                //foreach (String S in CustomHeaders)
-                //{
-                //    String[] t = S.Split(':');
-                //    c.DefaultRequestHeaders.Add(t[0], t[1]);
-                //}
 
                 SetDefaultHeaders(c, Session, Version);
 
