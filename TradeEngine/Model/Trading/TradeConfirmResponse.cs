@@ -67,7 +67,11 @@ namespace TradeEngine.Model.Trading
         public object Profit { get; set; }
 
         [JsonProperty("profitCurrency")]
+
         public object ProfitCurrency { get; set; }
+
+        [JsonProperty("errorCode")]
+        public string ErrorCode { get; set; }
     }
     public partial class AffectedDeal
     {
