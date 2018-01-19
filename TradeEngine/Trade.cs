@@ -9,6 +9,40 @@ namespace TradeEngine
 {
     public class Trade
     {
+        public enum eTradeStatus
+        {
+            /// <summary>
+            /// If the trade is new then a Work Order has not yet been sent. This is the default state of each Trade.
+            /// </summary>
+            New,
+            /// <summary>
+            /// Status for when the Work Order has been sent but no confirmation has been received
+            /// </summary>
+            WorkOrderSent,
+            /// <summary>
+            /// Status for when the Work Order has been confirmed
+            /// </summary>
+            WorkOrderConfirmed,
+            /// <summary>
+            /// When a Work Order has been opened the status is active
+            /// </summary>
+            TradeIsActive,
+            /// <summary>
+            /// When the trade has reached its set limit level it will be closed. 
+            /// </summary>
+            TradeHasClosed,
+            /// <summary>
+            /// If the trade is an auto repeat this will be the status until the conditionas are set for a new Work Order to be sent
+            /// </summary>
+            WaitingToRepeat,
+            /// <summary>
+            /// Status for when their has been an unhandled error
+            /// </summary>
+            Error
+        }
+
+        public eTradeStatus TradeStatus { get; set; }
+
         /// <summary>
         /// Attributes of the working order to be created
         /// </summary>
@@ -26,6 +60,8 @@ namespace TradeEngine
 
         public Trade (TradeAttributes tradeAttributes, Authentication.Session session)
         {
+            TradeStatus = eTradeStatus.New; //Set it to the default position
+
             this.TradeAttributes = tradeAttributes;
             this.Session = session;
         }
@@ -81,21 +117,7 @@ namespace TradeEngine
             Request.TimeInForce = TradeAttributes.TimeInForce;
             Request.Type = TradeAttributes.Type;
 
-
             return Request;
         }
-
-        //private List<String> GenerateCustomHTTPHeaders()
-        //{
-        //    List<String> TempStringList = new List<string>();
-
-        //    //The  :: acts as the position to split the string when creating the custom headers
-        //    TempStringList.Add("X-IG-API-KEY" + ":" + this.Session.API_Key);
-        //    TempStringList.Add("VERSION" + ":" + "2");
-        //    TempStringList.Add("X-SECURITY-TOKEN" + ":" + this.Session.X_SECURITY_TOKEN);
-        //    TempStringList.Add("CST" + ":" + this.Session.CST);
-
-        //    return TempStringList;
-        //}
     }
 }

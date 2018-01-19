@@ -23,5 +23,19 @@ namespace TradeEngine
         public String StopLevel { get { return null; } }
         public String TimeInForce { get { return "GOOD_TILL_CANCELLED"; } }
         public String Type { get; set; }
+        /// <summary>
+        /// If true then this trade will continue to repeat until stoped or target level reached
+        /// </summary>
+        public Boolean IsAutoRepeat { get; set; }
+        /// <summary>
+        /// Only set if the AutoRepeat is true
+        /// </summary>
+        public String TargetLevel { get; set; }
+
+        /// <summary>
+        /// Only create Work Order when the buy price is higher than open, only create when the sell price is lower. Stops trades being opened when a fall is in place
+        /// </summary>
+        public Boolean XXXXX { get; set; }
+
     }
 }
