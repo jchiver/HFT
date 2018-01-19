@@ -10,43 +10,86 @@ namespace TradeEngine.RestCommands
 {
     public class Post
     { 
-        public async Task<IGResponse<T>> Execute<T>(String URL, String Content, List<String> CustomHeaders)
+        public enum CommandType
+        {
+            Get,
+            Post
+        }
+
+        private void SetDefaultHeaders(HttpClient HttpClient, Authentication.Session session, String Version)
         {
 
-            HttpContent SendContent = new StringContent(Content,
-                                                Encoding.UTF8,
-                                                "application/json");//CONTENT-TYPE header
+            if (session.API_Key != string.Empty)
+            {
+                HttpClient.DefaultRequestHeaders.Add("X-IG-API-KEY", session.API_Key);
+            }
+
+            if (session.X_SECURITY_TOKEN != string.Empty)
+            {
+                HttpClient.DefaultRequestHeaders.Add("X-SECURITY-TOKEN", session.X_SECURITY_TOKEN);
+            }
+
+            if (session.CST != string.Empty)
+            {
+                HttpClient.DefaultRequestHeaders.Add("CST", session.CST);
+            }
+
+            HttpClient.DefaultRequestHeaders.Add("VERSION", Version);
+
+            HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        }
+
+        public async Task<IGResponse<T>> Execute<T>(String URL, Authentication.Session Session, CommandType commandType, String Version, Object ContentBody = null)
+        {
+
+            HttpContent SendContent = null;
+
+            if (ContentBody != null)
+            {
+                String SerializeObject = JsonConvert.SerializeObject(ContentBody);
+
+                SendContent = new StringContent(SerializeObject,
+                                                    Encoding.UTF8,
+                                                    "application/json");//CONTENT-TYPE header
+            }
 
             using (HttpClient c = new HttpClient())
             {
-                foreach (String S in CustomHeaders)
+                //foreach (String S in CustomHeaders)
+                //{
+                //    String[] t = S.Split(':');
+                //    c.DefaultRequestHeaders.Add(t[0], t[1]);
+                //}
+
+                SetDefaultHeaders(c, Session, Version);
+
+                 HttpResponseMessage response = new HttpResponseMessage();
+
+                switch (commandType)
                 {
-                    String[] t = S.Split(':');
-                    c.DefaultRequestHeaders.Add(t[0],t[1]);
+                    case CommandType.Get:
+                        response = c.GetAsync(URL).Result;
+                        break;
+                    case CommandType.Post:
+                        response = c.PostAsync(URL, SendContent).Result;
+                        break;
                 }
 
-                c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-
-                using (HttpResponseMessage response = c.PostAsync(URL, SendContent).Result)
+                using (HttpContent ReceivedContent = response.Content)
                 {
+                    string mycontent = await ReceivedContent.ReadAsStringAsync();//.result ;
 
-                    using (HttpContent ReceivedContent = response.Content)
-                    {
-                        string mycontent = await ReceivedContent.ReadAsStringAsync();//.result ;
+                    IGResponse<T> iGResponse = new IGResponse<T>();
 
-                        IGResponse<T> iGResponse = new IGResponse<T>();
+                    iGResponse.Response = JsonConvert.DeserializeObject<T>(mycontent);
+                    iGResponse.StatusCode = response.StatusCode;
+                    iGResponse.httpHeaders = response.Headers;
 
-                        iGResponse.Response = JsonConvert.DeserializeObject<T>(mycontent);
-                        iGResponse.StatusCode = response.StatusCode;
-                        iGResponse.httpHeaders = response.Headers;
-
-                        return iGResponse;
-
-                        
-                    }
+                    return iGResponse;
 
                 }
+
             }
         }
         

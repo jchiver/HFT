@@ -13,9 +13,22 @@ namespace TradeEngine
 
         private Authentication.Session Session;
 
+        //The deal reference from the most recent WO that was sent
+        private String DealReference;
+
         public Trade (TradeAttributes tradeAttributes)
         {
             this.TradeAttributes = tradeAttributes;
+        }
+
+        public async void GetTradeConfirm(Authentication.Session session)
+        {
+            this.Session = session;
+
+            RestCommands.Post Post = new RestCommands.Post();
+            RestCommands.IGResponse<Model.Trading.TradeConfirmResponse> Response = await Post.Execute<Model.Trading.TradeConfirmResponse>(this.Session.BaseURL + "/confirms" + "/" + DealReference,Session ,RestCommands.Post.CommandType.Get, "1");
+
+            Console.WriteLine(Response.Response.DealStatus);
         }
 
         public async void SendWorkingOrderRequest(Authentication.Session session)
@@ -23,12 +36,13 @@ namespace TradeEngine
             this.Session = session;
 
             RestCommands.Post Post = new RestCommands.Post();
-            RestCommands.IGResponse<Model.WorkingOrder.CreateWorkingOrderResponse> Response = await Post.Execute<Model.WorkingOrder.CreateWorkingOrderResponse>(this.Session.BaseURL +  "/workingorders/otc", GetSerializedSessionRequest(), GenerateCustomHTTPHeaders());
+            RestCommands.IGResponse<Model.WorkingOrder.CreateWorkingOrderResponse> Response = await Post.Execute<Model.WorkingOrder.CreateWorkingOrderResponse>(this.Session.BaseURL +  "/workingorders/otc", Session, RestCommands.Post.CommandType.Post, "2", GetWorkingOrderRequestContent());
 
-            Console.WriteLine("2");
+            DealReference = Response.Response.DealReference;
+            Console.WriteLine(DealReference);
         }
 
-        private String GetSerializedSessionRequest()
+        private Model.WorkingOrder.CreateWorkingOrderRequest GetWorkingOrderRequestContent()
         {
             Model.WorkingOrder.CreateWorkingOrderRequest Request = new Model.WorkingOrder.CreateWorkingOrderRequest();
 
@@ -49,20 +63,20 @@ namespace TradeEngine
             Request.Type = TradeAttributes.Type;
 
 
-            return JsonConvert.SerializeObject(Request);
+            return Request;
         }
 
-        private List<String> GenerateCustomHTTPHeaders()
-        {
-            List<String> TempStringList = new List<string>();
+        //private List<String> GenerateCustomHTTPHeaders()
+        //{
+        //    List<String> TempStringList = new List<string>();
 
-            //The  :: acts as the position to split the string when creating the custom headers
-            TempStringList.Add("X-IG-API-KEY" + ":" + this.Session.API_Key);
-            TempStringList.Add("VERSION" + ":" + "2");
-            TempStringList.Add("X-SECURITY-TOKEN" + ":" + this.Session.X_SECURITY_TOKEN);
-            TempStringList.Add("CST" + ":" + this.Session.CST);
+        //    //The  :: acts as the position to split the string when creating the custom headers
+        //    TempStringList.Add("X-IG-API-KEY" + ":" + this.Session.API_Key);
+        //    TempStringList.Add("VERSION" + ":" + "2");
+        //    TempStringList.Add("X-SECURITY-TOKEN" + ":" + this.Session.X_SECURITY_TOKEN);
+        //    TempStringList.Add("CST" + ":" + this.Session.CST);
 
-            return TempStringList;
-        }
+        //    return TempStringList;
+        //}
     }
 }

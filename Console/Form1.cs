@@ -40,6 +40,8 @@ namespace Console
 
             tr.SendWorkingOrderRequest(Session);
 
+            tr.GetTradeConfirm(Session);
+
         }
     }
 }

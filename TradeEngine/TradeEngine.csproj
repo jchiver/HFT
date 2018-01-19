@@ -47,6 +47,7 @@
     <Compile Include="Authentication\SessionRequest.cs" />
     <Compile Include="Authentication\SessionResponse.cs" />
     <Compile Include="AutoTrader.cs" />
+    <Compile Include="Model\Trading\TradeConfirmResponse.cs" />
     <Compile Include="Model\WorkingOrder\CreateWorkingOrderRequest.cs" />
     <Compile Include="Model\WorkingOrder\CreateWorkingOrderResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

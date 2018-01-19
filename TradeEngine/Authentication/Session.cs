@@ -36,7 +36,7 @@ namespace TradeEngine.Authentication
         {
 
             RestCommands.Post Post = new RestCommands.Post();
-            RestCommands.IGResponse<SessionResponse> Response = await Post.Execute<SessionResponse>(this.BaseURL + @"/session", GetSerializedSessionRequest(), GenerateCustomHTTPHeaders());
+            RestCommands.IGResponse<SessionResponse> Response = await Post.Execute<SessionResponse>(this.BaseURL + @"/session", this,RestCommands.Post.CommandType.Post, "2", GetWorkingSessionRequestContent());
 
             this.Response = Response;
 
@@ -47,30 +47,28 @@ namespace TradeEngine.Authentication
 
             IEnumerable<string> headerValuesB = ReceivedHeaders.GetValues("X-SECURITY-TOKEN");
             X_SECURITY_TOKEN = headerValuesB.FirstOrDefault();
-
-            Console.WriteLine("2");
         }
 
-        private String GetSerializedSessionRequest()
+        private SessionRequest GetWorkingSessionRequestContent()
         {
             SessionRequest sessionRequest = new SessionRequest();
             sessionRequest.EncryptedPassword = false;
             sessionRequest.Identifier = Username;
             sessionRequest.Password = Password;
 
-            return JsonConvert.SerializeObject(sessionRequest);
+            return sessionRequest;
         }
+        
+        //private List<String> GenerateCustomHTTPHeaders()
+        //{
+        //    List<String> TempStringList = new List<string>();
 
-        private List<String> GenerateCustomHTTPHeaders()
-        {
-            List<String> TempStringList = new List<string>();
+        //    //The  :: acts as the position to split the string when creating the custom headers
+        //    TempStringList.Add("X-IG-API-KEY" + ":" + this.API_Key);
+        //    TempStringList.Add("VERSION" + ":" + "2");
 
-            //The  :: acts as the position to split the string when creating the custom headers
-            TempStringList.Add("X-IG-API-KEY" + ":" + this.API_Key);
-            TempStringList.Add("VERSION" + ":" + "2");
-
-            return TempStringList;
-        }
+        //    return TempStringList;
+        //}
 
 
     }
