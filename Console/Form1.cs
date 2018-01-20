@@ -44,6 +44,9 @@ namespace Console
 
             tr.DeleteWorkingOrder();
 
+            TradeEngine.Streamer.Client client = new TradeEngine.Streamer.Client(Session);
+            client.CreateConnection();
+
         }
     }
 }

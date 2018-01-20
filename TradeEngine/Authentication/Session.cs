@@ -21,7 +21,7 @@ namespace TradeEngine.Authentication
 
         public String X_SECURITY_TOKEN { get; set; }
 
-        RestCommands.IGResponse<SessionResponse> Response;
+        public RestCommands.IGResponse<SessionResponse> Response { get; set; }
 
 
         public Session(String Username, String Password, String API_Key, String URL)
