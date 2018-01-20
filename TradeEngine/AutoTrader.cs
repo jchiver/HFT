@@ -15,9 +15,12 @@ namespace TradeEngine
             Trades = new List<Trade>();
         }
 
-        public void AddTrade()
+        public void AddTrade(Trade Trade)
         {
-            //Trades.Add(new Trade());
+            Trades.Add(Trade);
         }
     }
 }
+
+
+///This will monitor trades and execute the appriopriate actions or update them as required.
