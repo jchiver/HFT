@@ -53,6 +53,7 @@ namespace TradeEngine.Streamer
 
         private void L1LsPriceDataTableListener_Update(object sender, UpdateArgs<L1LsPriceData> e)
         {
+            Console.WriteLine("The time stamp is: " + DateTime.Now.ToUniversalTime().ToString());
             Console.WriteLine("The bid is: " + e.UpdateData.Bid);
             Console.WriteLine("The offer is: " + e.UpdateData.Offer);
             Console.WriteLine("The offer is: " + e.ItemName);

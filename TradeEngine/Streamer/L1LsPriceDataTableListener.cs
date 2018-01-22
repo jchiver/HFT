@@ -34,5 +34,6 @@ namespace TradeEngine.Streamer
                 return null;
             }
         }
+
     }
 }
