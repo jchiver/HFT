@@ -58,6 +58,9 @@
     <Compile Include="RestCommands\IGResponse.cs" />
     <Compile Include="RestCommands\Post.cs" />
     <Compile Include="Streamer\Client.cs" />
+    <Compile Include="Streamer\L1LsPriceData.cs" />
+    <Compile Include="Streamer\L1LsPriceDataTableListener.cs" />
+    <Compile Include="Streamer\TableListenerAdapterBase.cs" />
     <Compile Include="Trade.cs" />
     <Compile Include="TradeAttributes.cs" />
   </ItemGroup>

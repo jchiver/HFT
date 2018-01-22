@@ -41,6 +41,33 @@ namespace TradeEngine.Streamer
             }
         }
 
+        public void EstablishListtentoEpic(String Epic)
+        {
+            //IndexListener = new Listener<IndexUpdateHandler>();
+            L1LsPriceDataTableListener l1LsPriceDataTableListener = new L1LsPriceDataTableListener();
+
+            SubscribeToIndexMarketData(l1LsPriceDataTableListener, Epic);
+
+            l1LsPriceDataTableListener.Update += L1LsPriceDataTableListener_Update;
+        }
+
+        private void L1LsPriceDataTableListener_Update(object sender, UpdateArgs<L1LsPriceData> e)
+        {
+            Console.WriteLine("The bid is: " + e.UpdateData.Bid);
+            Console.WriteLine("The offer is: " + e.UpdateData.Offer);
+            Console.WriteLine("The offer is: " + e.ItemName);
+        }
+
+        public SubscribedTableKey SubscribeToIndexMarketData(IHandyTableListener iHandyTableListener, String Epic)
+        {
+            String Trade = "MARKET:" + Epic;
+            String[] Items = new String[] { Trade };
+            String[] Fields = new string[] { "BID", "OFFER", "UPDATE_TIME" };
+
+            ExtendedTableInfo extendedTableInfo = new ExtendedTableInfo(Items, "MERGE", Fields, true);
+
+            return lsClient.SubscribeTable(extendedTableInfo, iHandyTableListener, false);
+        }
 
         public void OnActivityWarning(bool warningOn)
         {
@@ -64,7 +91,7 @@ namespace TradeEngine.Streamer
 
         public void OnEnd(int cause)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void OnFailure(PushServerException e)
@@ -79,7 +106,7 @@ namespace TradeEngine.Streamer
 
         public void OnNewBytes(long bytes)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void OnSessionStarted(bool isPolling)

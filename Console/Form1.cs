@@ -29,7 +29,7 @@ namespace Console
             tradeAttributes.Direction = "BUY";
             tradeAttributes.Epic = "IX.D.DOW.DAILY.IP";
             tradeAttributes.GuaranteedStop = "false";
-            tradeAttributes.Level = "26090";
+            tradeAttributes.Level = "26300";
             tradeAttributes.LimitDistance = "1";
             tradeAttributes.Size = "1";
             tradeAttributes.StopDistance = "50";
@@ -47,6 +47,18 @@ namespace Console
             TradeEngine.Streamer.Client client = new TradeEngine.Streamer.Client(Session);
             client.CreateConnection();
 
+            //TradeEngine.Streamer.IndexUpdateHandler indexUpdateHandler = new TradeEngine.Streamer.IndexUpdateHandler();
+            //indexUpdateHandler.IndexValueChanged += IndexUpdateHandler_IndexValueChanged;
+
+            client.EstablishListtentoEpic("CS.D.BITCOIN.TODAY.IP");
+
         }
+
+        //private void IndexUpdateHandler_IndexValueChanged(object source, TradeEngine.Streamer.IndexListenerEventArgs ea)
+        //{
+        //    System.Console.WriteLine("The bid is : " + ea.Bid.ToString());
+        //    System.Console.WriteLine("The offer is : " + ea.Offer.ToString());
+        //    //throw new NotImplementedException();
+        //}
     }
 }

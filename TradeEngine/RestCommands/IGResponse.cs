@@ -20,5 +20,10 @@ namespace TradeEngine.RestCommands
         /// Stores the headers received from the request so they can be processed or used should they need to be
         /// </summary>
         public HttpHeaders httpHeaders { get; set; }
+
+        public void something()
+        {
+
+        }
     }
 }
