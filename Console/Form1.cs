@@ -50,7 +50,12 @@ namespace Console
             //TradeEngine.Streamer.IndexUpdateHandler indexUpdateHandler = new TradeEngine.Streamer.IndexUpdateHandler();
             //indexUpdateHandler.IndexValueChanged += IndexUpdateHandler_IndexValueChanged;
 
-            client.EstablishListtentoEpic("CS.D.BITCOIN.TODAY.IP");
+            //client.EstablishListtentoEpic("CS.D.BITCOIN.TODAY.IP");
+            TradeEngine.AutoTrader autoTrader = new TradeEngine.AutoTrader(Session);
+            autoTrader.EstablishListtentoEpic("CS.D.BITCOIN.TODAY.IP");
+            autoTrader.EstablishListtentoEpic("IX.D.FTSE.DAILY.IP");
+
+            
 
         }
 

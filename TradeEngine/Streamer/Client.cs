@@ -9,6 +9,7 @@ namespace TradeEngine.Streamer
 {
     public class Client : IConnectionListener
     {
+        public Boolean ConnectionEstablished { get; set; }
 
         private LSClient lsClient;
         private ConnectionInfo connectionInfo;
@@ -17,6 +18,7 @@ namespace TradeEngine.Streamer
         public Client(Authentication.Session Session)
         {
             this.Session = Session;
+            ConnectionEstablished = false;
         }
 
         public void CreateConnection()
@@ -34,10 +36,13 @@ namespace TradeEngine.Streamer
 
                 lsClient.OpenConnection(connectionInfo, this);
 
+                ConnectionEstablished = true;
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine("LS Connection Failed");
+                ConnectionEstablished = false;
             }
         }
 
@@ -56,11 +61,16 @@ namespace TradeEngine.Streamer
             Console.WriteLine("The time stamp is: " + DateTime.Now.ToUniversalTime().ToString());
             Console.WriteLine("The bid is: " + e.UpdateData.Bid);
             Console.WriteLine("The offer is: " + e.UpdateData.Offer);
-            Console.WriteLine("The offer is: " + e.ItemName);
+            Console.WriteLine("The epic is: " + e.ItemName);
         }
 
         public SubscribedTableKey SubscribeToIndexMarketData(IHandyTableListener iHandyTableListener, String Epic)
         {
+            if (ConnectionEstablished == false)
+            {
+                throw new Exception();
+            }
+
             String Trade = "MARKET:" + Epic;
             String[] Items = new String[] { Trade };
             String[] Fields = new string[] { "BID", "OFFER", "UPDATE_TIME" };
