@@ -57,12 +57,28 @@ namespace TradeEngine
         private void L1LsPriceDataTableListener_Update(object sender, UpdateArgs<Streamer.L1LsPriceData> e)
         {
             //Action here to do something when the index value changes
-            Console.WriteLine("The time stamp is: " + DateTime.Now.ToUniversalTime().ToString());
-            Console.WriteLine("The bid is: " + e.UpdateData.Bid);
-            Console.WriteLine("The offer is: " + e.UpdateData.Offer);
-            Console.WriteLine("The epic is: " + e.ItemName);
+            //Console.WriteLine("The time stamp is: " + DateTime.Now.ToUniversalTime().ToString());
+            //Console.WriteLine("The bid is: " + e.UpdateData.Bid);
+            //Console.WriteLine("The offer is: " + e.UpdateData.Offer);
+            //Console.WriteLine("The epic is: " + e.ItemName);
         }
 
+        public void EstablishListtentoTrade()
+        {
+            TradeDataTableListner tradeDataTableListner = new TradeDataTableListner();
+            client.SubscribeToTradeUpdates(tradeDataTableListner);
+
+            tradeDataTableListner.Update += TradeDataTableListner_Update;
+        }
+
+        private void TradeDataTableListner_Update(object sender, UpdateArgs<TradeData> e)
+        {
+            if (e.UpdateData != null)
+            {
+                Console.Write("Trade update type: " + e.UpdateData.Type);
+            }
+            
+        }
     }
 }
 

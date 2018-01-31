@@ -80,9 +80,26 @@ namespace TradeEngine.Streamer
             return lsClient.SubscribeTable(extendedTableInfo, iHandyTableListener, false);
         }
 
+        public SubscribedTableKey SubscribeToTradeUpdates(IHandyTableListener iHandyTableListener)
+        {
+            if (ConnectionEstablished == false)
+            {
+                throw new Exception();
+            }
+
+            String Trade = "TRADE:" + Session.Response.Response.CurrentAccountId;
+            String[] Items = new String[] { Trade };
+            //String[] Fields = new string[] { "CONFIRMS" };
+            String[] Fields = new string[] { "CONFIRMS", "OPU", "WOU" };
+
+            ExtendedTableInfo extendedTableInfo = new ExtendedTableInfo(Items, "DISTINCT", Fields, true);
+
+            return lsClient.SubscribeTable(extendedTableInfo, iHandyTableListener, true);
+        }
+
         public void OnActivityWarning(bool warningOn)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void OnClose()
@@ -107,12 +124,12 @@ namespace TradeEngine.Streamer
 
         public void OnFailure(PushServerException e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void OnFailure(PushConnException e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void OnNewBytes(long bytes)

@@ -36,13 +36,7 @@ namespace Console
             tradeAttributes.Type = "STOP";
 
 
-            TradeEngine.Trade tr = new TradeEngine.Trade(tradeAttributes, Session);
-
-            tr.SendWorkingOrderRequest();
-
-            tr.GetTradeConfirm();
-
-            tr.DeleteWorkingOrder();
+            
 
             TradeEngine.Streamer.Client client = new TradeEngine.Streamer.Client(Session);
             client.CreateConnection();
@@ -55,7 +49,18 @@ namespace Console
             autoTrader.EstablishListtentoEpic("CS.D.BITCOIN.TODAY.IP");
             autoTrader.EstablishListtentoEpic("IX.D.FTSE.DAILY.IP");
 
-            
+            autoTrader.EstablishListtentoTrade();
+
+
+            TradeEngine.Trade tr = new TradeEngine.Trade(tradeAttributes, Session);
+
+            tr.SendWorkingOrderRequest();
+
+            tr.GetTradeConfirm();
+
+            tr.DeleteWorkingOrder();
+
+
 
         }
 

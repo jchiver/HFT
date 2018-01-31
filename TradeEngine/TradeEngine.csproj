@@ -61,6 +61,10 @@
     <Compile Include="Streamer\L1LsPriceData.cs" />
     <Compile Include="Streamer\L1LsPriceDataTableListener.cs" />
     <Compile Include="Streamer\TableListenerAdapterBase.cs" />
+    <Compile Include="Streamer\TradeDataConfirmResponse.cs" />
+    <Compile Include="Streamer\TradeDataOPUResponse.cs" />
+    <Compile Include="Streamer\TradeDataTableListner.cs" />
+    <Compile Include="Streamer\TradeDataWOUResponse.cs" />
     <Compile Include="Trade.cs" />
     <Compile Include="TradeAttributes.cs" />
   </ItemGroup>
